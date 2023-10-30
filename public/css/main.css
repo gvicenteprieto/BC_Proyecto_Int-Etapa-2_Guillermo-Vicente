@@ -317,8 +317,8 @@ template, [hidden] {
  * Add the correct display in IE 10.
  */
 .header {
-  margin: 1.5rem 1.5rem;
-  padding: 30px 10px 10px 0px;
+  margin: 0 1.5rem;
+  padding: 0 10px 10px 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;
