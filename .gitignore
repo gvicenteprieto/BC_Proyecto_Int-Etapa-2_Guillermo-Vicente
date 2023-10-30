@@ -20,8 +20,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-./src/firebaseConexion.js
-*./src/firebaseConexion.js
-./src/Context/ProductContext-FIREBASE.jsx
-/Context/ProductContext-FIREBASE.jsx
-/ProductContext-FIREBASE.jsx

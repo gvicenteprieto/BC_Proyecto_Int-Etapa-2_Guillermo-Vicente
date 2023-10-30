@@ -735,7 +735,7 @@ template, [hidden] {
     cursor: pointer;
   }
   .header .cart {
-    padding-left: 3rem;
+    padding-left: 1rem;
   }
   .header .menu {
     display: none;
@@ -812,7 +812,7 @@ html {
 body {
   height: auto;
   margin: 0;
-  background-image: url("../../images/bg/bg__desktop-aut-jason-leung.jpg");
+  background-image: url("../../public/images/bg/bg__desktop-aut-jason-leung.jpg");
   background-attachment: fixed;
 }
 

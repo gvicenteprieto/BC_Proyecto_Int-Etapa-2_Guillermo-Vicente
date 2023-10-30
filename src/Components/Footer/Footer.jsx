@@ -5,7 +5,7 @@ const Footer = () => {
     <>
       <footer class="footer">
         <picture class="footer__logo">
-          <Link to="/">
+          <Link to={"/"}>
             <img
               className="logo"
               id="logo"
@@ -17,17 +17,17 @@ const Footer = () => {
         </picture>
         <menu>
           <nav class="footer__links">
-            <Link to="contact">Contacto</Link>
+            <Link to={"/contact"}>Contacto</Link>
           </nav>
         </menu>
         <menu class="footer__address">
           <p>
-            <Link to="contact">
+            <Link to={"/contact"}>
               <i class="fas fa-map-marker-alt"></i> Paraguay 4979, CABA
             </Link>
           </p>
           <p>
-            <Link to="contact">
+            <Link to={"/contact"}>
               {" "}
               <i class="fas fa-phone-alt"></i> 011 1234-5678{" "}
             </Link>
@@ -35,7 +35,7 @@ const Footer = () => {
           <p>
             <i class="fas fa-envelope"></i>
             <Link
-              to="mailto:jugueteria@jugueteria_cosmica.com.ar"
+              to={"mailto:jugueteria@jugueteria_cosmica.com.ar"}
               target="_blank"
             >
               jugueteria@cosmica.com.ar

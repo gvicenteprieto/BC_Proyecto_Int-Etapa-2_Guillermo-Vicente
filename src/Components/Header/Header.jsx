@@ -2,7 +2,7 @@ import CartButton from "../Cart/CartButton";
 import { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [openMenu, setopenMenu] = useState("false");
@@ -31,7 +31,7 @@ const Header = () => {
   return (
     <header className="header">
       <picture className="header__logo">
-        <Link to="/">
+        <Link to={"/"}>
           <img
             className="logo"
             id="logo"
@@ -64,11 +64,11 @@ const Header = () => {
         </Link>
       </menu>
       <nav id="links" className="links header__links">
-        <Link to="/"> Home</Link>
-        <Link to="update">Alta</Link>
-        <Link to="contact">Contacto</Link>
-        <Link to="about">Nosotros</Link>
-        <Link to="shops">Shops</Link>
+        <NavLink to={"/"}> Home</NavLink>
+        <NavLink to={"/update"}>Alta</NavLink>
+        <NavLink to={"/contact"}>Contacto</NavLink>
+        <NavLink to={"/about"}>Nosotros</NavLink>
+        <NavLink to={"/shops"}>Shops</NavLink>
       </nav>
     </header>
   );
