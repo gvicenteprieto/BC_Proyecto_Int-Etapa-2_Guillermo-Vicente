@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <footer class="footer">
-        <picture class="footer__logo">
+      <footer className="footer">
+        <picture className="footer__logo">
           <Link to={"/"}>
             <img
               className="logo"
@@ -16,24 +16,24 @@ const Footer = () => {
           </Link>
         </picture>
         <menu>
-          <nav class="footer__links">
+          <nav className="footer__links">
             <Link to={"/contact"}>Contacto</Link>
           </nav>
         </menu>
-        <menu class="footer__address">
+        <menu className="footer__address">
           <p>
             <Link to={"/contact"}>
-              <i class="fas fa-map-marker-alt"></i> Paraguay 4979, CABA
+              <i className="fas fa-map-marker-alt"></i> Paraguay 4979, CABA
             </Link>
           </p>
           <p>
             <Link to={"/contact"}>
               {" "}
-              <i class="fas fa-phone-alt"></i> 011 1234-5678{" "}
+              <i className="fas fa-phone-alt"></i> 011 1234-5678{" "}
             </Link>
           </p>
           <p>
-            <i class="fas fa-envelope"></i>
+            <i className="fas fa-envelope"></i>
             <Link
               to={"mailto:jugueteria@jugueteria_cosmica.com.ar"}
               target="_blank"
@@ -42,27 +42,27 @@ const Footer = () => {
             </Link>
           </p>
         </menu>
-        <nav class="footer__social">
+        <nav className="footer__social">
           <Link
             to="https://www.facebook.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i class="fab fa-facebook-square"></i>
+            <i className="fab fa-facebook-square"></i>
           </Link>
           <Link
             to="https://www.instagram.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i class="fab fa-instagram-square"></i>
+            <i className="fab fa-instagram-square"></i>
           </Link>
           <Link
             to="https://www.twitter.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i class="fa-brands fa-x-twitter"></i>
+            <i className="fa-brands fa-x-twitter"></i>
           </Link>
         </nav>
       </footer>

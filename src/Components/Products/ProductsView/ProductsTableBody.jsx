@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { ProductContext } from "../../../Context/ProductContext";
 import { CartContext } from "../../../Context/CartContext";
 
-const ProductsTableRows = () => {
+const ProductsTableRows = ({sale}) => {
   const { products, deleteProduct, setUpdateProduct } =
     useContext(ProductContext);
     const { addToCart } = useContext(CartContext);
@@ -18,23 +18,28 @@ const ProductsTableRows = () => {
           <td>$ {product.price}</td>
           <td>
             <div className="buttons-container">
+            {!sale && (
               <button
                 className="delete-button"
                 onClick={() => deleteProduct(product.name)}
               >
                 <FaTrash />
               </button>
-
+              )}
+              {sale && (
               <button>
                 <FaCartShopping onClick={() => addToCart(product)} />
               </button>
-
+              )}
+              
+              {!sale && (
               <button
                 className="edit-button"
                 onClick={() => setUpdateProduct(product)}
               >
                 <FaEdit />
               </button>
+               )}
             </div>
           </td>
         </tr>

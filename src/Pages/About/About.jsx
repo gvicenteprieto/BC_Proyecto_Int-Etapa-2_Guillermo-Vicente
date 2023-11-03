@@ -1,11 +1,11 @@
 import React from "react";
-
+import { Link, NavLink } from "react-router-dom";
 const About = () => {
   return (
-    <main class="main__about">
+    <main className="main__about">
       <h1>Nosotros</h1>
-      <section class="section__about">
-        <article class="article__about">
+      <section className="section__about">
+        <article className="article__about">
           <h2>Quiénes somos?</h2>
           <p>
             Somos una Juguetería Online que busca acercar a los niños y niñas a
@@ -20,7 +20,7 @@ const About = () => {
             calidad.
           </p>
         </article>
-        <article class="article__about">
+        <article className="article__about">
           <h2>Equipo 'cósmico'</h2>
           <p>Conocé a nuestro equipo de trabajo:</p>
           <p>
@@ -34,72 +34,70 @@ const About = () => {
             distribución de los mismos.
           </p>
         </article>
-        {/* <article class="article__about team">
-          <div class="teamColumn">
-            <div class="teamCard">
+        <article className="article__about team">
+          <div className="teamColumn">
+            <div className="teamCard">
               <img
                 src="https://www.w3schools.com/w3images/team1.jpg"
                 alt="Jane"
-                style="width:100%"
               />
-              <div class="container">
+              <div className="container">
                 <h3>Jane Doe</h3>
-                <p class="title">CEO & Founder</p>
+                <p className="title">CEO & Founder</p>
                 <p>Some text that describes me lorem ipsum ipsum lorem.</p>
 
                 <p>
-                  <button class="button">
-                    <a href="contact.html">Contacto</a>
+                  <button className="button">
+                    <Link to="/contact">Contacto</Link>
                   </button>
                 </p>
               </div>
             </div>
           </div>
 
-          <div class="teamColumn">
-            <div class="teamCard">
+          <div className="teamColumn">
+            <div className="teamCard">
               <img
                 src="https://www.w3schools.com/w3images/team2.jpg"
                 alt="Mike"
-                style="width:100%"
               />
-              <div class="container">
+
+              <div className="container">
                 <h3>Mike Ross</h3>
-                <p class="title">Art Director</p>
+                <p className="title">Art Director</p>
                 <p>Some text that describes me lorem ipsum ipsum lorem.</p>
 
                 <p>
-                  <button class="button">
-                    <a href="contact.html">Contacto</a>
+                  <button className="button">
+                    <Link to="/contact">Contacto</Link>
                   </button>
                 </p>
               </div>
             </div>
           </div>
 
-          <div class="teamColumn">
-            <div class="teamCard">
+          <div className="teamColumn">
+            <div className="teamCard">
               <img
                 src="https://www.w3schools.com/w3images/team3.jpg"
                 alt="John"
-                style="width:100%"
               />
-              <div class="container">
+              <div className="container">
                 <h3>John Doe</h3>
-                <p class="title">Designer</p>
+                <p className="title">Designer</p>
                 <p>Some text that describes me lorem ipsum ipsum lorem.</p>
 
                 <p>
-                  <button class="button">
-                    <a href="contact.html">Contacto</a>
+                  <button className="button">
+                    <Link to="/contact">Contacto</Link>
                   </button>
                 </p>
               </div>
             </div>
           </div>
-        </article> */}
+        </article>
 
-        <article class="article__about">
+        <article className="article__about">
           <h2>Por qué elegirnos?</h2>
 
           <p>
@@ -115,7 +113,7 @@ const About = () => {
             materiales reciclables para el embalaje de nuestros productos.
           </p>
         </article>
-        <article class="article__about">
+        <article className="article__about">
           <h2>Dónde estamos?</h2>
 
           <p>Estamos en la ciudad de Buenos Aires, Argentina.</p>
@@ -129,9 +127,9 @@ const About = () => {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11049.493992494281!2d-58.43302822803537!3d-34.57800071713376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4aabcb7b7fd341%3A0xd4d803156d38286c!2sDistrito%20Arcos%20Premium%20Outlet!5e0!3m2!1ses!2sar!4v1692542656680!5m2!1ses!2sar"
             width="600"
             height="450"
-            allowfullscreen=""
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </article>
       </section>

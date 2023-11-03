@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { ProductContext } from "../../Context/ProductContext";
 
 const ProductsList = () => {
-  const { products, deleteProduct, setUpdateProduct, loading } = useContext(ProductContext);
+  const { products, loading } = useContext(ProductContext);
   
   const [listType, setListType] = useState("");
 
@@ -14,7 +14,7 @@ const ProductsList = () => {
     
   return (
     <>
-      <div style={{minHeight:"700px"}} >
+      <main className="main__index">
         {loading === false ? (
           <h3>Cargando Registro de Inventario...</h3>
         ) : (
@@ -26,7 +26,6 @@ const ProductsList = () => {
                 <div>
                   <h4>Total de Productos registrados: {products.length}</h4>
                 </div>
-
                 {
                   <>
                     {listType === "" && <h3>Seleccione una vista</h3>}
@@ -46,31 +45,22 @@ const ProductsList = () => {
                     </div>
                   </>
                 }
-
                 {listType === "table" && (
                   <>
                     <h3>Tabla de Productos, por orden alfabético</h3>
                     <div className="ProductsTable">
-                      <ProductsTable
-                        // products={products}
-                        // deleteProduct={deleteProduct}
-                        // setUpdateProduct={setUpdateProduct}
-                      />
+                      <ProductsTable />
                     </div>
                   </>
                 )}
-
                 {listType === "card" && (
                   <>
                     <h3>Tarjetas de Productos, por orden alfabético</h3>
-                    <div className="ProductsCard">
+                    <div className="section__products">
                       {products.map((product) => (
                         <ProductsCard
                           key={product.name}
-                          product={product}
-                          // deleteProduct={deleteProduct}
-                          // setUpdateProduct={setUpdateProduct}
-                        />
+                          product={product}/>
                       ))}
                     </div>
                   </>
@@ -79,7 +69,7 @@ const ProductsList = () => {
             )}
           </div>
         )}
-      </div>
+      </main>
     </>
   );
 };

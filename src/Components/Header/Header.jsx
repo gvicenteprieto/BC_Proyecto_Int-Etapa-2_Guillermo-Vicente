@@ -1,16 +1,25 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../Context/CartContext";
+import { ProductContext } from "../../Context/ProductContext";
 import { Link, NavLink } from "react-router-dom";
-import CartButton from "../Cart/CartButton";
+import CartModal from "../Cart/CartModal";
 import Dates from "../Dates/Dates";
 import { openMenu } from "../../Utils/dropDown";
+
+import { FaCartShopping } from "react-icons/fa6";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
   const dropDown = () => {
     openMenu();
-  }
+  };
+  const [openModal, setOpenModal] = useState(false);
+
+  //función buscar el producto de la base de datos
 
   const { totalItems } = useContext(CartContext);
+  const { products, searchProducts } = useContext(ProductContext);
   return (
     <>
       <Dates />
@@ -30,19 +39,20 @@ const Header = () => {
         <menu className="search">
           <form action="" id="searchForm">
             <input type="text" id="nameProd" placeholder="Buscar producto" />
-            <button type="submit">
+            {/* <button type="submit">
               <i className="fas fa-search"></i>
-            </button>
+            </button> */}
           </form>
         </menu>
-        <menu className="cart">
+        <menu className="cart-counter-number">
           <div className="cart-counter">
-            <CartButton />
+            <FaCartShopping className="cartButton" onClick={() => setOpenModal(true)} />
             <div className="cart-counter-number">
               <p>{totalItems()}</p>
             </div>
           </div>
         </menu>
+        {openModal && <CartModal title={"Carrito de Compras"} isOpen={openModal} setIsOpen={setOpenModal}/>}
         <menu className="menu">
           <Link onClick={dropDown} to="#">
             <i className="fas fa-bars"></i>{" "}
@@ -55,6 +65,7 @@ const Header = () => {
           <NavLink to={"/about"}>Nosotros</NavLink>
           <NavLink to={"/shops"}>Shops</NavLink>
         </nav>
+        <ToastContainer autoClose={800} />
       </header>
     </>
   );

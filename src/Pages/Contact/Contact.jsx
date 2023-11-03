@@ -7,7 +7,7 @@ const Contact = () => {
     <div id="successMessage" class="success-message"></div>
     <form id="form__contact" class="form__contact">
       <p id="validationMessage"></p>
-      <label for="name" class="label__contact">Nombre</label>
+      <label htmlFor="name" class="label__contact">Nombre</label>
       <input
         class="input__contact"
         type="text"
@@ -19,7 +19,7 @@ const Contact = () => {
         <p id="errorName" class="error-message"></p>
       </div>
 
-      <label for="lastName" class="label__contact">Apellido</label>
+      <label htmlFor="lastName" class="label__contact">Apellido</label>
       <input
         class="input__contact"
         type="text"
@@ -30,7 +30,7 @@ const Contact = () => {
       <div>
         <p id="errorLastName" class="error-message"></p>
       </div>
-      <label for="email" class="label__contact">Email</label>
+      <label htmlFor="email" class="label__contact">Email</label>
       <input
         class="input__contact"
         type="email"
@@ -42,7 +42,7 @@ const Contact = () => {
         <p id="errorEmail" class="error-message"></p>
       </div>
 
-      <label for="phone" class="label__contact">Teléfono</label>
+      <label htmlFor="phone" class="label__contact">Teléfono</label>
       <input
         class="input__contact"
         type="tel"
@@ -54,7 +54,7 @@ const Contact = () => {
         <p id="errorPhone" class="error-message"></p>
       </div>
 
-      <label for="mesasageSubject" class="label__contact">Asunto</label>
+      <label htmlFor="mesasageSubject" class="label__contact">Asunto</label>
       <select class="input__contact" name="subject" id="subject">
         <option value="buy">Consulta de compra</option>
         <option value="change">Consulta por cambio</option>
@@ -64,7 +64,7 @@ const Contact = () => {
         <p id="errorSubject" class="error-message"></p>
       </div>
 
-      <label for="mesasage" class="label__contact">Mensaje</label>
+      <label htmlFor="mesasage" class="label__contact">Mensaje</label>
       <textarea
         class="input__contact"
         name="message"

@@ -41,20 +41,12 @@ const Shops = () => {
 
   shops();
 
-
-
   return (
-    <div>
+    <main className="main__shops">
       <h1>Shops</h1>
       <div id="container">
-        <section className="section__shops">
-          {/* <h3>Username</h3>
-          <p>Address</p>
-          <p>Website</p> */}
-        </section>
-
       </div>
-    </div>
+    </main>
   );
 };
 

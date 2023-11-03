@@ -16,9 +16,9 @@ const CartProvider = ({ children }) => {
   
   const addToCart = (item) => {
     // bonus: resolver stock de products en productsContext
-    item.stock = cart.find((i) => i.id === item.id)
-      ? item.stock
-      : item.stock - 1;
+    // item.stock = cart.find((i) => i.id === item.id)
+    //   ? item.stock
+    //   : item.stock - 1;
     item.quantity = cart.find((i) => i.id === item.id) ? item.quantity + 1 : 1;
     const newCart = cart.filter((i) => i.id !== item.id);
     localStorage.setItem("cart", JSON.stringify([...newCart, item]));
