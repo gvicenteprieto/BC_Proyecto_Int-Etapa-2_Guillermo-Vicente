@@ -16,10 +16,9 @@ const Header = () => {
   };
   const [openModal, setOpenModal] = useState(false);
 
-  //función buscar el producto de la base de datos
-
   const { totalItems } = useContext(CartContext);
-  const { products, searchProducts } = useContext(ProductContext);
+  const { handleSearch, handleChange, search } =
+    useContext(ProductContext);
   return (
     <>
       <Dates />
@@ -37,22 +36,37 @@ const Header = () => {
           <h2 className="brandTitle">Juguetería Cósmica</h2>
         </picture>
         <menu className="search">
-          <form action="" id="searchForm">
-            <input type="text" id="nameProd" placeholder="Buscar producto" />
-            {/* <button type="submit">
+          <form onSubmit={handleSearch}>
+            <input
+              className="search__input"
+              type="text"
+              placeholder="Buscar..."
+              onChange={handleChange}
+              value={search}
+            />
+            <button className="search__button" type="submit">
               <i className="fas fa-search"></i>
-            </button> */}
+            </button>
           </form>
         </menu>
         <menu className="cart-counter-number">
           <div className="cart-counter">
-            <FaCartShopping className="cartButton" onClick={() => setOpenModal(true)} />
+            <FaCartShopping
+              className="cartButton"
+              onClick={() => setOpenModal(true)}
+            />
             <div className="cart-counter-number">
               <p>{totalItems()}</p>
             </div>
           </div>
         </menu>
-        {openModal && <CartModal title={"Carrito de Compras"} isOpen={openModal} setIsOpen={setOpenModal}/>}
+        {openModal && (
+          <CartModal
+            title={"Carrito de Compras"}
+            isOpen={openModal}
+            setIsOpen={setOpenModal}
+          />
+        )}
         <menu className="menu">
           <Link onClick={dropDown} to="#">
             <i className="fas fa-bars"></i>{" "}

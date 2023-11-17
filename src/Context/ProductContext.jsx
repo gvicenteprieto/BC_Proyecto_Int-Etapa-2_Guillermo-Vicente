@@ -9,22 +9,42 @@ const ProductProvider = ({ children }) => {
   const [errorLoad, setErrorLoad] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [validationMessage, setValidationMessage] = useState("");
+  const [errorName, setErrorName] = useState("");
+  const [errorPrice, setErrorPrice] = useState("");
+  const [errorStock, setErrorStock] = useState("");
+  const [errorBrand, setErrorBrand] = useState("");
+  const [errorCategory, setErrorCategory] = useState("");
+  const [errorShort_description, setErrorShort_description] = useState("");
+  const [errorLong_description, setErrorLong_description] = useState("");
+  const [errorFree_shipping, setErrorFree_shipping] = useState("");
+  const [errorAge_from, setErrorAge_from] = useState("");
+  const [errorAge_to, setErrorAge_to] = useState("");
+  const [errorPhoto, setErrorPhoto] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [brand, setBrand] = useState("");
+  const [short_description, setShort_description] = useState("");
+  const [long_description, setLong_description] = useState("");
+  const [free_shipping, setFree_shipping] = useState("");
+  const [age_from, setAge_from] = useState("");
+  const [age_to, setAge_to] = useState("");
+  const [photo, setPhoto] = useState("");
+
+
+  const urlData =
+    "https://6532fc15d80bd20280f632f1.mockapi.io/api/int_products";
+
   const fetchProducts = async () => {
     setLoading(false);
-    const urlData = "https://6532fc15d80bd20280f632f1.mockapi.io/api/";
-    const response = await fetch(urlData + "int_products");
+    const response = await fetch(urlData);
     const data = await response.json();
     if (data) {
       setProducts(data.sort((a, b) => a.name.localeCompare(b.name)));
       setLoading(true);
     }
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      fetchProducts();
-    }, 250);
-  }, []);
 
   const addProduct = (product) => {
     const existProduct = products.find((p) => p.name === product.name);
@@ -34,36 +54,166 @@ const ProductProvider = ({ children }) => {
       return;
     }
 
-    let nameRegex = /^[A-Z 0-9][ A-Za-z 0-9.']{0,30}$/;
-    let priceRegex = /^[0-9]+([.][0-9]+)?$/;
-    let stockRegex = /^[0-9]+$/;
-    let brandRegex = /^[A-Z 0-9][ A-Za-z 0-9.']{0,30}$/;
-    let categoryRegex = /^[A-Z][ A-Za-z 0-9.']{0,30}$/;
-    let short_descriptionRegex = /^[A-Za-z0-9\s]{1,30}$/;
-    let long_descriptionRegex = /^[A-Za-z0-9\s]{1,30}$/;
-    let free_shippingRegex = /^[A-Za-z0-9\s]{1,30}$/;
-    let age_fromRegex = /^[0-9]{1,2}$/;
-    let age_toRegex = /^[0-9]{1,2}$/;
-    let photoRegex = /^[A-Za-z0-9\s]{1,300}$/;
+    const validateField = (field, fieldName, min, max, regex, message) => {
+      if (!field) {
+        return `El campo ${fieldName} es obligatorio`;
+      }
+      if (field.length < min) {
+        return `El campo ${fieldName} debe tener al menos ${min} caracteres`;
+      }
+      if (field.length > max) {
+        return `El campo ${fieldName} debe tener menos de ${max} caracteres`;
+      }
+      if (!regex.test(field)) {
+        return message;
+      }
 
+      return "";
+    };
+
+    const validateNumber = (field, fieldName, min, max) => {
+      if (!field) {
+        return `El campo ${fieldName} es obligatorio`;
+      }
+
+      if (field < min) {
+        return `El campo ${fieldName} debe ser mayor o igual a ${min} caracteres`;
+      }
+
+      if (field > max) {
+        return `El campo ${fieldName} debe ser menor o igual a ${max} caracteres`;
+      }
+      return "";
+    };
+
+    const validateForm = () => {
+      const errorName = validateField(
+        product.name,
+        "Nombre",
+        1,
+        30,
+        /^[A-Z 0-9][ A-Za-z 0-9.']{0,30}$/,
+        "El nombre debe comenzar en mayúsculas y tener tener caracteres válidos."
+      );
+
+      const errorPrice = validateNumber(
+        product.price,
+        "Precio",
+        1,
+        9,
+        /^[0-9]+([.][0-9]+)?$/
+      );
+
+      const errorStock = validateNumber(
+        product.stock,
+        "Stock",
+        1,
+        9,
+        /^[0-9]+$/
+      );
+
+      const errorBrand = validateField(
+        product.brand,
+        "Marca",
+        1,
+        30,
+        /^[A-Z 0-9][ A-Za-z 0-9.']{0,30}$/,
+        "La marca debe comenzar en mayúsculas y tener tener caracteres válidos."
+      );
+
+      const errorCategory = validateField(
+        product.category,
+        "Categoría",
+        1,
+        30,
+        /^[A-Z][ A-Za-z 0-9.']{0,30}$/,
+        "La categoría debe comenzar en mayúsculas y tener tener caracteres válidos."
+      );
+
+      const errorShort_description = validateField(
+        product.short_description,
+        "Descripción corta",
+        1,
+        30,
+        /^[A-Za-z0-9\s]{1,30}$/,
+        "La descripción corta debe tener caracteres válidos."
+      );
+
+      const errorLong_description = validateField(
+        product.long_description,
+        "Descripción larga",
+        1,
+        30,
+        /^[A-Za-z0-9\s]{1,30}$/,
+        "La descripción larga debe tener caracteres válidos."
+      );
+
+      const errorFree_shipping = validateField(
+        product.free_shipping,
+        "Envío gratis",
+        1,
+        30,
+        /^[A-Za-z0-9\s]{1,30}$/,
+        "El envío gratis debe tener caracteres válidos."
+      );
+
+      const errorAge_from = validateNumber(
+        product.age_from,
+        "Edad desde",
+        1,
+        2,
+        /^[0-9]{1,2}$/
+      );
+
+      const errorAge_to = validateNumber(
+        product.age_to,
+        "Edad hasta",
+        1,
+        2,
+        /^[0-9]{1,2}$/
+      );
+
+      const errorPhoto = validateField(
+        product.photo,
+        "Foto",
+        1,
+        300,
+        /^[A-Za-z0-9\s]{1,300}$/,
+        "La foto debe tener caracteres válidos."
+      );
+
+      setErrorName(errorName);
+      setErrorPrice(errorPrice);
+      setErrorStock(errorStock);
+      setErrorBrand(errorBrand);
+      setErrorCategory(errorCategory);
+      setErrorShort_description(errorShort_description);
+      setErrorLong_description(errorLong_description);
+      setErrorFree_shipping(errorFree_shipping);
+      setErrorAge_from(errorAge_from);
+      setErrorAge_to(errorAge_to);
+      setErrorPhoto(errorPhoto);
+
+      if (
+        errorName === "" &&
+        errorPrice === "" &&
+        errorStock === "" &&
+        errorBrand === "" &&
+        errorCategory === "" &&
+        errorShort_description === "" &&
+        errorLong_description === "" &&
+        errorAge_from === "" &&
+        errorAge_to === "" &&
+        errorPhoto === ""
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    
     if (
-      // product.name.trim() === "" ||
-      // product.description.trim() === "" ||
-      // product.price.trim() === ""
-
-
-      // !nameRegex.test(product.name) ||
-      // !priceRegex.test(product.price) ||
-      // !stockRegex.test(product.stock) ||
-      // !brandRegex.test(product.brand) ||
-      // !categoryRegex.test(product.category) ||
-      // !short_descriptionRegex.test(product.short_description) ||
-      // !long_descriptionRegex.test(product.long_description) ||
-      // !free_shippingRegex.test(product.free_shipping) ||
-      // !age_fromRegex.test(product.age_from) ||
-      // !age_toRegex.test(product.age_to) ||
-      // !photoRegex.test(product.photo)
-
       product.name.trim() === "" ||
       product.price.trim() === "" ||
       product.stock.trim() === "" ||
@@ -71,20 +221,19 @@ const ProductProvider = ({ children }) => {
       product.category.trim() === "" ||
       product.short_description.trim() === "" ||
       product.long_description.trim() === "" ||
-      product.free_shipping.trim() === "" ||
       product.age_from.trim() === "" ||
       product.age_to.trim() === "" ||
       product.photo.trim() === ""
-
     ) {
       toast.error("Todos los campos son obligatorios!");
       return;
     }
+
+    // if (!validateForm()) {
+    //   setErrorLoad(true);
+    //   return;
+    // }
     const newProduct = {
-      // name: product.name,
-      // description: product.description,
-      // price: product.price,
-      // date: product.date,
       name: product.name,
       price: product.price,
       stock: product.stock,
@@ -97,9 +246,8 @@ const ProductProvider = ({ children }) => {
       age_to: product.age_to,
       photo: product.photo,
     };
+
     const productsFetch = async () => {
-      const urlData =
-        "https://6532fc15d80bd20280f632f1.mockapi.io/api/" + "int_products";
       const response = await fetch(urlData, {
         method: "POST",
         headers: {
@@ -115,22 +263,19 @@ const ProductProvider = ({ children }) => {
 
     setTimeout(() => {
       fetchProducts();
-    }, 750);
+    }, 250);
+
   };
 
   const deleteProduct = async (name) => {
     setErrorLoad(false);
-    const productsData = await fetch(
-      "https://6532fc15d80bd20280f632f1.mockapi.io/api/int_products"
-    );
+    const productsData = await fetch(urlData);
     const productsDataJson = await productsData.json();
     const productDelete = productsDataJson
       .map((doc) => ({ name: doc.name }))
       .filter((doc) => doc.name === name);
 
     const productsFetch = async () => {
-      const urlData =
-        "https://6532fc15d80bd20280f632f1.mockapi.io/api/" + "int_products";
       const response = await fetch(urlData);
       const data = await response.json();
       data.forEach((doc) => {
@@ -145,21 +290,17 @@ const ProductProvider = ({ children }) => {
     setTimeout(() => {
       toast.info("Producto eliminado con éxito!");
       fetchProducts();
-    }, 500);
+    }, 250);
   };
 
   const editProduct = async (name, product) => {
-    const productsData = await fetch(
-      "https://6532fc15d80bd20280f632f1.mockapi.io/api/int_products"
-    );
+    const productsData = await fetch(urlData);
     const productsDataJson = await productsData.json();
     const productEdit = productsDataJson
       .map((doc) => ({ name: doc.name }))
       .filter((doc) => doc.name === name);
 
     const productsFetch = async () => {
-      const urlData =
-        "https://6532fc15d80bd20280f632f1.mockapi.io/api/" + "int_products";
       const response = await fetch(urlData);
       const data = await response.json();
       data.forEach((doc) => {
@@ -180,21 +321,71 @@ const ProductProvider = ({ children }) => {
     setTimeout(() => {
       toast.success("Producto actualizado con éxito!");
       fetchProducts();
-    }, 500);
+    }, 250);
   };
 
-  const searchProducts = async (name) => {
-    const productsData = await fetch(
-      "https://6532fc15d80bd20280f632f1.mockapi.io/api/int_products"
-    );
-    const productsDataJson = await productsData.json();
-    console.log("productsDataJson", productsDataJson);
-    const productSearch = productsDataJson
-      .map((doc) => ({ name: doc.name }))
-      .filter((doc) => doc.name === name);
-    console.log("productSearch", productSearch);
-    return productSearch;
-  }
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const [search, setSearch] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const searchProducts = (search) => {
+    const filteredProducts = products.filter((product) => {
+      return product.name.toLowerCase().includes(search.toLowerCase());
+    });
+
+    setFilteredProducts(filteredProducts);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    searchProducts(search);
+  };
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    searchProducts(search);
+    setFilteredCategoryProducts([]);
+
+    if (search.length === 0) {
+      setFilteredProducts([]);
+    }
+  }, [search]);
+
+  // categorias unicas  por orden alfabetico
+  const categories = products.map((product) => product.category);
+  const uniqueCategories = [...new Set(categories)].sort();
+
+  //filtrado por categorias
+  const [category, setCategory] = useState("");
+  const [filteredCategoryProducts, setFilteredCategoryProducts] = useState([]);
+
+  const filterCategoryProducts = (category) => {
+    const filteredCategoryProducts = products
+      .filter((product) => {
+        return product.category.toLowerCase().includes(category.toLowerCase());
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
+    setFilteredCategoryProducts(filteredCategoryProducts);
+  };
+
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
+  };
+
+  useEffect(() => {
+    filterCategoryProducts(category);
+    setFilteredProducts([]);
+    if (category.length === 0) {
+      setFilteredCategoryProducts([]);
+    }
+  }, [category]);
+
   return (
     <ProductContext.Provider
       value={{
@@ -207,7 +398,26 @@ const ProductProvider = ({ children }) => {
         editProduct,
         setUpdateProduct,
         setErrorLoad,
-        searchProducts
+        searchProducts,
+        handleSearch,
+        handleChange,
+        filteredProducts,
+        uniqueCategories,
+        category,
+        handleCategory,
+        filteredCategoryProducts,
+
+        errorName,
+        errorPrice,
+        errorStock,
+        errorBrand,
+        errorCategory,
+        errorShort_description,
+        errorLong_description,
+        errorFree_shipping,
+        errorAge_from,
+        errorAge_to,
+        errorPhoto,
       }}
     >
       {children}

@@ -8,7 +8,7 @@ const Banner = () => {
   return (
     <aside>
       <div className="container">
-        <Link to={"/contact"}>
+        <Link className="Link" to={"/contact"}>
           <div className="swiper-container">
             <div className="swiper-wrapper">
               <div className="bannerSlides fadeBanner">
@@ -32,7 +32,6 @@ const Banner = () => {
                   <h5>Estamos para ayudarte</h5>
                 </div>
               </div>
-              {/* <p id="date"></p> */}
             </div>
           </div>
         </Link>

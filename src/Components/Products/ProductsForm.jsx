@@ -15,7 +15,25 @@ const ProductsForm = () => {
   const [age_to, setAge_to] = useState("");
   const [photo, setPhoto] = useState("");
 
+  // const [product, setProduct] = useState({
+  //   name: "",
+  //   price: "",
+  //   stock: "",
+  //   brand: "",
+  //   category: "",
+  //   short_description: "",
+  //   long_description: "",
+  //   free_shipping: "",
+  //   age_from: "",
+  //   age_to: "",
+  //   photo: "",
+  // });
+
   const [error, setError] = useState(false);
+
+  const [validationMessage, setValidationMessage] = useState("");
+  const [validationAddMessage, setValidationAddMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const {
     addProduct,
@@ -23,10 +41,28 @@ const ProductsForm = () => {
     updateProduct,
     setUpdateProduct,
     setErrorLoad,
+    errorName,
+    errorPrice,
+    errorStock,
+    errorBrand,
+    errorCategory,
+    errorShort_description,
+    errorLong_description,
+    errorFree_shipping,
+    errorAge_from,
+    errorAge_to,
+    errorPhoto,
   } = useContext(ProductContext);
+
+  //errorName, errorPrice, errorStock, errorBrand, errorCategory, errorShort_description, errorLong_description, errorFree_shipping, errorAge_from, errorAge_to, errorPhoto
+  // useEffect(() => {
+  //   errorName || errorPrice || errorStock || errorBrand || errorCategory
+  // }, [name, price, errorStock, errorBrand, errorCategory]);
 
   useEffect(() => {
     if (updateProduct) {
+      //previo sugerencia Seba:
+
       setName(updateProduct.name);
       setPrice(updateProduct.price);
       setStock(updateProduct.stock);
@@ -38,6 +74,22 @@ const ProductsForm = () => {
       setAge_from(updateProduct.age_from);
       setAge_to(updateProduct.age_to);
       setPhoto(updateProduct.photo);
+
+      //post sugerencia Seba:
+      // setProduct({
+      //   name: updateProduct.name,
+      //   price: updateProduct.price,
+      //   stock: updateProduct.stock,
+      //   brand: updateProduct.brand,
+      //   category: updateProduct.category,
+      //   short_description: updateProduct.short_description,
+      //   long_description: updateProduct.long_description,
+      //   free_shipping: updateProduct.free_shipping,
+      //   age_from: updateProduct.age_from,
+      //   age_to: updateProduct.age_to,
+      //   photo: updateProduct.photo,
+      // });
+      setValidationMessage(`Actualizando producto: ${updateProduct.name}`);
     } else {
       setName("");
       setPrice("");
@@ -50,6 +102,21 @@ const ProductsForm = () => {
       setAge_from("");
       setAge_to("");
       setPhoto("");
+
+      //post sugerencia Seba:
+      // setProduct({
+      //   name: "",
+      //   price: "",
+      //   stock: "",
+      //   brand: "",
+      //   category: "",
+      //   short_description: "",
+      //   long_description: "",
+      //   free_shipping: "",
+      //   age_from: "",
+      //   age_to: "",
+      //   photo: "",
+      // });
     }
   }, [updateProduct]);
 
@@ -72,8 +139,12 @@ const ProductsForm = () => {
 
     if (updateProduct) {
       editProduct(updateProduct.name, product);
+      setValidationMessage(``);
     } else {
+
+      setValidationAddMessage(`Agregando producto`);
       addProduct(product);
+      setValidationAddMessage(``);
     }
     setTimeout(() => {
       handleReset(e);
@@ -105,6 +176,7 @@ const ProductsForm = () => {
     } else if (e.target.name === "photo") {
       setPhoto(e.target.value);
     }
+
   };
 
   const handleReset = (e) => {
@@ -120,15 +192,58 @@ const ProductsForm = () => {
     setAge_from("");
     setAge_to("");
     setPhoto("");
+
   };
+
+  useEffect(() => {
+    if (addProduct) {
+      setSuccessMessage("Producto agregado con éxito");
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 2000);
+    }
+  }, [addProduct]);
+
 
   return (
     <main className="main__update">
       <h1>Alta</h1>
+
+      <div className="success-message">
+        {updateProduct ? (
+          <h3 id="validationMessage">
+            {validationMessage
+              ? (() => {
+                  window.scrollTo(0, 0);
+                  return validationMessage;
+                })()
+              : ""}
+          </h3>
+        ) : (
+          ""
+        )}
+      </div>
+
+      <div className="success-message">
+        {addProduct ? (
+          <h3 id="validationMessage">
+            {validationAddMessage
+              ? (() => {
+                  window.scrollTo(0, 0);
+                  return validationAddMessage;
+                })()
+              : ""}
+          </h3>
+        ) : (
+          ""
+        )}
+      </div>
+
       <form className="form form__update" onSubmit={handleSubmit}>
         <label htmlFor="name" className="label__add">
           Nombre
         </label>
+
         <input
           className="input__add"
           type="text"
@@ -139,9 +254,11 @@ const ProductsForm = () => {
           placeholder="ex: X Men, Osita, etc."
         />
 
-        {/* <div>
-          <p id="errorName" class="error-message"></p>
-        </div> */}
+        <div>
+          <p id="errorName" className="error-message">
+            {errorName ? errorName : ""}
+          </p>
+        </div>
 
         <label htmlFor="price" className="label__add">
           Precio
@@ -155,6 +272,13 @@ const ProductsForm = () => {
           onChange={handleChange}
           placeholder="ex: 0.99, 25.33 etc."
         />
+
+        <div>
+          <p id="errorPrice" className="error-message">
+            {errorPrice ? errorPrice : ""}
+          </p>
+        </div>
+
         <label htmlFor="stock" className="label__add">
           Stock
         </label>
@@ -167,6 +291,13 @@ const ProductsForm = () => {
           onChange={handleChange}
           placeholder="ex: 1, 10, etc."
         />
+
+        <div>
+          <p id="errorStock" className="error-message">
+            {errorStock ? errorStock : ""}
+          </p>
+        </div>
+
         <label htmlFor="brand" className="label__add">
           Marca
         </label>
@@ -179,6 +310,13 @@ const ProductsForm = () => {
           onChange={handleChange}
           placeholder="ex: 3M, Cosmic Toys, etc."
         />
+
+        <div>
+          <p id="errorBrand" className="error-message">
+            {errorBrand ? errorBrand : ""}
+          </p>
+        </div>
+
         <label htmlFor="category" className="label__add">
           Categoría
         </label>
@@ -191,6 +329,13 @@ const ProductsForm = () => {
           onChange={handleChange}
           placeholder="ex: Peluches, Juguetes, etc."
         />
+
+        <div>
+          <p id="errorCategory" className="error-message">
+            {errorCategory ? errorCategory : ""}
+          </p>
+        </div>
+
         <label htmlFor="short_description" className="label__add">
           Descripción corta
         </label>
@@ -203,6 +348,13 @@ const ProductsForm = () => {
           onChange={handleChange}
           placeholder="ex: Lorem ipsum."
         />
+
+        <div>
+          <p id="errorShort_description" className="error-message">
+            {errorShort_description ? errorShort_description : ""}
+          </p>
+        </div>
+
         <label htmlFor="long_description" className="label__add">
           Descripción larga
         </label>
@@ -215,10 +367,16 @@ const ProductsForm = () => {
           onChange={handleChange}
           placeholder="ex: Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         />
+
+        <div>
+          <p id="errorLong_description" className="error-message">
+            {errorLong_description ? errorLong_description : ""}
+          </p>
+        </div>
         <label htmlFor="free_shipping" className="label__add">
           Envío gratis
         </label>
-        <select
+        {/* <select
           class="input__add"
           name="free_shipping"
           id="free_shipping"
@@ -227,8 +385,8 @@ const ProductsForm = () => {
         >
           <option value="1">Si</option>
           <option value="0">No</option>
-        </select>
-        {/* <input
+        </select> */}
+        <input
           className="input__add"
           type="text"
           id="free_shipping"
@@ -236,7 +394,14 @@ const ProductsForm = () => {
           value={free_shipping}
           onChange={handleChange}
           placeholder="Envío gratis del producto"
-        /> */}
+        />
+
+        <div>
+          <p id="errorFree_shipping" className="error-message">
+            {errorFree_shipping ? errorFree_shipping : ""}
+          </p>
+        </div>
+
         <label htmlFor="age_from" className="label__add">
           Edad desde
         </label>
@@ -250,6 +415,12 @@ const ProductsForm = () => {
           placeholder="Edad desde..."
         />
 
+        <div>
+          <p id="errorAge_from" className="error-message">
+            {errorAge_from ? errorAge_from : ""}
+          </p>
+        </div>
+
         <label htmlFor="age_to" className="label__add">
           Edad hasta
         </label>
@@ -262,6 +433,13 @@ const ProductsForm = () => {
           onChange={handleChange}
           placeholder="Edad hasta..."
         />
+
+        <div>
+          <p id="errorAge_to" className="error-message">
+            {errorAge_to ? errorAge_to : ""}
+          </p>
+        </div>
+
         <label htmlFor="photo" className="label__add">
           Foto
         </label>
@@ -275,13 +453,23 @@ const ProductsForm = () => {
           placeholder="Foto del producto"
         />
 
+        <div>
+          <p id="errorPhoto" className="error-message">
+            {errorPhoto ? errorPhoto : ""}
+          </p>
+        </div>
+
         {updateProduct ? (
           <div className="form-buttons buttons-container">
             <button type="submit" className="edit-button">
               Actualizar Producto
             </button>
-            <button type="reset" className="reset-button" onClick={handleReset}>
-              Limpiar Formulario
+            <button
+              type="button"
+              className="delete-button"
+              onClick={() => setUpdateProduct(null)}
+            >
+              Cancelar
             </button>
           </div>
         ) : (

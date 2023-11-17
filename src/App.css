@@ -178,9 +178,41 @@
 .Main .ProductsCard {
   display: flex;
   justify-content: center;
+
   align-items: center;
   flex-wrap: wrap;
 }
+
+.Main .ProductsCard .buttons-containers {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  bottom: 10px;
+}
+
+.Main .ProductsCard .buttons-containers button {
+  margin-top: .5rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #3b59ba;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Main .ProductsCard .buttons-containers .delete-button {
+  background-color: #ba3b3b;
+}
+
+.Main .ProductsCard .buttons-containers .edit-button {
+  background-color: #2b8a2b;
+}
+
+
 
 /* MAIN table*/
 .Main .ProductsTable table {
@@ -243,6 +275,9 @@
 }
 
 .Main .ProductsTable .buttons-container .edit-button {
+  background-color: #2b8a2b;
+
+}.buttons-container .edit-button {
   background-color: #2b8a2b;
 
 }

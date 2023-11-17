@@ -7,7 +7,8 @@ const ProductsTable = () => {
   const { products, deleteProduct, setUpdateProduct } = useContext(ProductContext);
 
   return (
-    <table>
+    <main className="main__index">
+    <table >
       <thead>
         <tr>
           <th>Nombre</th>
@@ -20,6 +21,7 @@ const ProductsTable = () => {
         <ProductsTableBody />
       </tbody>
     </table>
+  </main>
   );
 };
 

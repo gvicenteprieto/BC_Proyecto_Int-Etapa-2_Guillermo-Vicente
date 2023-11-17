@@ -9,6 +9,7 @@ const ProductsCard = ({ product, sale }) => {
   const { addToCart } = useContext(CartContext);
 
   return (
+    <main className="main__index">
     <section className="category">
       <section className="section__products">
         <article >
@@ -20,7 +21,7 @@ const ProductsCard = ({ product, sale }) => {
                 <p className="product__brand">{product.brand}</p>
                 <p className="product__price">$ {product.price}</p>
                 <p className="product__category">{product.category}</p>
-                <div>
+                <div className="buttons-containers">
                   {!sale && (
                     <button
                       className="delete-button"
@@ -50,6 +51,7 @@ const ProductsCard = ({ product, sale }) => {
         </article>
       </section>
     </section>
+  </main>
   );
 };
 

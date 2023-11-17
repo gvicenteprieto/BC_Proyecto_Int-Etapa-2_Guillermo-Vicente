@@ -14,7 +14,7 @@ const ProductsList = () => {
     
   return (
     <>
-      <main className="main__index">
+      <main >
         {loading === false ? (
           <h3>Cargando Registro de Inventario...</h3>
         ) : (
@@ -22,7 +22,7 @@ const ProductsList = () => {
             {loading === true && products.length === 0 ? (
               <h3>No hay productos registrados</h3>
             ) : (
-              <>
+              <section >
                 <div>
                   <h4>Total de Productos registrados: {products.length}</h4>
                 </div>
@@ -56,7 +56,7 @@ const ProductsList = () => {
                 {listType === "card" && (
                   <>
                     <h3>Tarjetas de Productos, por orden alfabético</h3>
-                    <div className="section__products">
+                    <div className="ProductsCard">
                       {products.map((product) => (
                         <ProductsCard
                           key={product.name}
@@ -65,7 +65,7 @@ const ProductsList = () => {
                     </div>
                   </>
                 )}
-              </>
+              </section>
             )}
           </div>
         )}

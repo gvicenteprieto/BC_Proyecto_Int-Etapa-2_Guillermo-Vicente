@@ -14,7 +14,7 @@ const ProductsTableRows = ({sale}) => {
       {products.map((product) => (
         <tr key={product.name}>
           <td>{product.name}</td>
-          <td>{product.description}</td>
+          <td>{product.short_description}</td>
           <td>$ {product.price}</td>
           <td>
             <div className="buttons-container">
