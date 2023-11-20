@@ -15,20 +15,6 @@ const ProductsForm = () => {
   const [age_to, setAge_to] = useState("");
   const [photo, setPhoto] = useState("");
 
-  // const [product, setProduct] = useState({
-  //   name: "",
-  //   price: "",
-  //   stock: "",
-  //   brand: "",
-  //   category: "",
-  //   short_description: "",
-  //   long_description: "",
-  //   free_shipping: "",
-  //   age_from: "",
-  //   age_to: "",
-  //   photo: "",
-  // });
-
   const [error, setError] = useState(false);
 
   const [validationMessage, setValidationMessage] = useState("");
@@ -54,14 +40,8 @@ const ProductsForm = () => {
     errorPhoto,
   } = useContext(ProductContext);
 
-  //errorName, errorPrice, errorStock, errorBrand, errorCategory, errorShort_description, errorLong_description, errorFree_shipping, errorAge_from, errorAge_to, errorPhoto
-  // useEffect(() => {
-  //   errorName || errorPrice || errorStock || errorBrand || errorCategory
-  // }, [name, price, errorStock, errorBrand, errorCategory]);
-
   useEffect(() => {
     if (updateProduct) {
-      //previo sugerencia Seba:
 
       setName(updateProduct.name);
       setPrice(updateProduct.price);
@@ -75,20 +55,7 @@ const ProductsForm = () => {
       setAge_to(updateProduct.age_to);
       setPhoto(updateProduct.photo);
 
-      //post sugerencia Seba:
-      // setProduct({
-      //   name: updateProduct.name,
-      //   price: updateProduct.price,
-      //   stock: updateProduct.stock,
-      //   brand: updateProduct.brand,
-      //   category: updateProduct.category,
-      //   short_description: updateProduct.short_description,
-      //   long_description: updateProduct.long_description,
-      //   free_shipping: updateProduct.free_shipping,
-      //   age_from: updateProduct.age_from,
-      //   age_to: updateProduct.age_to,
-      //   photo: updateProduct.photo,
-      // });
+
       setValidationMessage(`Actualizando producto: ${updateProduct.name}`);
     } else {
       setName("");
@@ -103,26 +70,12 @@ const ProductsForm = () => {
       setAge_to("");
       setPhoto("");
 
-      //post sugerencia Seba:
-      // setProduct({
-      //   name: "",
-      //   price: "",
-      //   stock: "",
-      //   brand: "",
-      //   category: "",
-      //   short_description: "",
-      //   long_description: "",
-      //   free_shipping: "",
-      //   age_from: "",
-      //   age_to: "",
-      //   photo: "",
-      // });
     }
   }, [updateProduct]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const product = { name, description, price };
+
     const product = {
       name,
       price,
